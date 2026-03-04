@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #C8F135;
+  --color-bg: #0A0A0A;
+  --color-text: #FFFFFF;
+  --color-muted: #888888;
+  --color-surface: #141414;
+  --color-border: #222222;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-cairo), sans-serif;
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero entrance animations ──────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate-1 { animation: fadeInUp 0.6s ease forwards; animation-delay: 0.10s; opacity: 0; }
+.hero-animate-2 { animation: fadeInUp 0.6s ease forwards; animation-delay: 0.25s; opacity: 0; }
+.hero-animate-3 { animation: fadeInUp 0.6s ease forwards; animation-delay: 0.40s; opacity: 0; }
+.hero-animate-4 { animation: fadeInUp 0.6s ease forwards; animation-delay: 0.55s; opacity: 0; }
+.hero-animate-5 { animation: fadeInUp 0.6s ease forwards; animation-delay: 0.70s; opacity: 0; }
+.hero-animate-6 { animation: fadeInUp 0.5s ease forwards; animation-delay: 0.85s; opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate-1,
+  .hero-animate-2,
+  .hero-animate-3,
+  .hero-animate-4,
+  .hero-animate-5,
+  .hero-animate-6 {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 2px; }
+
+/* Selection color */
+::selection {
+  background: var(--color-primary);
+  color: #000;
+}
