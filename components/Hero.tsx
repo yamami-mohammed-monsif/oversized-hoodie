@@ -75,7 +75,7 @@ export default function Hero() {
           >
             {config.productName}
           </p>
-          <h1 className="font-bebas font-mediumo text-3xl md:text-6xl lg:text-[80px] leading-none tracking-wide max-w-2xl">
+          <h1 className="font-bebas font-mediumo text-5xl md:text-6xl lg:text-[80px] leading-none tracking-wide max-w-2xl">
             {config.tagline}
           </h1>
           <p className="font-cairo text-sm mt-2 opacity-60">
