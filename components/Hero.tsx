@@ -22,7 +22,7 @@ export default function Hero() {
         alt={`${config.brandName} — ${config.productNameAr}`}
         fill
         priority
-        className="object-cover object-top"
+        className="object-cover [object-position:30%_50%] md:object-top"
         sizes="100vw"
         quality={85}
       />
