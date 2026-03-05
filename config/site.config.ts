@@ -91,6 +91,7 @@ export const config = {
 
   // ── 🎯 CTA Buttons ─────────────────────────────────────────
   ctaButtonText: "اطلب دروك",
+  submitNotificationMessage: "الطلبية وصلت! راح نتواصل معك خلال 24 ساعة",
 
   // ── 📸 SEO ─────────────────────────────────────────────────
   galleryAltText: "صور Oversized Hoodie من WELD BLED",

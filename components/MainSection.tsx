@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { config } from "@/config/site.config";
 import Gallery from "@/components/Gallery";
 import ProductDetails from "@/components/ProductDetails";
 import OrderForm from "@/components/OrderForm";
@@ -17,7 +18,7 @@ export default function MainSection() {
       <Toast
         isVisible={showToast}
         onClose={() => setShowToast(false)}
-        message="الطلبية وصلت! راح نتواصل معك خلال 24 ساعة"
+        message={config.submitNotificationMessage}
       />
       <section
         id="main-section"
