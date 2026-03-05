@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { config } from "@/config/site.config";
 
@@ -29,11 +29,63 @@ const GALLERY_IMAGES = [
 
 export default function Gallery() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const galleryRef = useRef<HTMLDivElement>(null);
+
+  const handlePrevImage = () => {
+    setActiveIdx((prev) => (prev === 0 ? GALLERY_IMAGES.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = () => {
+    setActiveIdx((prev) => (prev === GALLERY_IMAGES.length - 1 ? 0 : prev + 1));
+  };
+
+  // Handle swipe gestures
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    const difference = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = difference > 30; // Swipe threshold
+    const isRightSwipe = difference < -30;
+
+    if (isLeftSwipe) {
+      handlePrevImage();
+    } else if (isRightSwipe) {
+      handleNextImage();
+    }
+  };
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        handlePrevImage();
+      } else if (e.key === "ArrowRight") {
+        handleNextImage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div className="flex flex-col gap-3">
       {/* Large active image — aspect-[4/5] keeps height proportional */}
-      <div className="aspect-[4/5] w-full rounded-xl overflow-hidden relative">
+      <div
+        ref={galleryRef}
+        className="aspect-[4/5] w-full rounded-xl overflow-hidden relative cursor-grab active:cursor-grabbing group"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <Image
           src={GALLERY_IMAGES[activeIdx].src}
           alt={GALLERY_IMAGES[activeIdx].alt}
@@ -42,6 +94,47 @@ export default function Gallery() {
           sizes="(max-width: 768px) 100vw, 50vw"
           quality={85}
         />
+
+        {/* Navigation arrows */}
+        <button
+          onClick={handlePrevImage}
+          className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          aria-label="Previous image"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        <button
+          onClick={handleNextImage}
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          aria-label="Next image"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
       </div>
 
       {/* Thumbnail row */}
