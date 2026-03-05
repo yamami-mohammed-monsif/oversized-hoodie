@@ -18,7 +18,7 @@ export default function Hero() {
     >
       {/* Hero Image */}
       <Image
-        src="/hero.jpg"
+        src={config.heroImage}
         alt={`${config.brandName} — ${config.productNameAr}`}
         fill
         priority

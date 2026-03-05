@@ -60,6 +60,37 @@ export const config = {
       text: "القياس صح والقماش دافي. هذي مش آخر مرة نطلب من WELD BLED",
     },
   ],
+  testimonialsSectionTitle: "شنو قالو عملاؤنا",
+  testimonialsRating: "4.9",
+  testimonialsRatingCount: "بناءً على +200 طلبية",
+
+  // ── 📸 Images ──────────────────────────────────────────────
+  heroImage: "/hero.jpg",
+  galleryImages: [
+    {
+      src: "/image1.webp",
+      alt: "هودي أوفرسايز — المنظر الأمامي",
+    },
+    {
+      src: "/image2.webp",
+      alt: "هودي أوفرسايز — تفصيل الخامة",
+    },
+    {
+      src: "/image3.webp",
+      alt: "هودي أوفرسايز — كلوز أب",
+    },
+    {
+      src: "/image4.webp",
+      alt: "هودي أوفرسايز — ستايل الشارع",
+    },
+    {
+      src: "/image5.webp",
+      alt: "هودي أوفرسايز — لايفستايل",
+    },
+  ],
+
+  // ── 🎯 CTA Buttons ─────────────────────────────────────────
+  ctaButtonText: "اطلب دروك",
 
   // ── 📸 SEO ─────────────────────────────────────────────────
   galleryAltText: "صور Oversized Hoodie من WELD BLED",
